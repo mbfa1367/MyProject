@@ -1,0 +1,213 @@
+﻿@model IEnumerable<MonitorPatient_Dto>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="description" content="....">
+    <link rel="stylesheet" href="~/css/siteHTML.css">
+    <script type="text/javascript">
+        $("#logOutdiv").show();
+        $("#MonitorPatient").show();
+        $("#NursePatientAppointment").show();
+        $("#NursePage").show();
+        $("#login").hide();
+        $("#Registeration").hide();
+        function handleLogOutClick() {
+            alert("You are successfully Log Out.");
+            window.location = '@Url.Action("logOut", "Account")';
+
+        }
+                @*function handleClick(personID) {
+                    alert("The Patient is rejected.");
+                    window.location = '@Url.Action("DoctorRemovePatient", "Account")?personID=' + personID;
+
+                }
+
+        function validate(personID) {
+            var doctor = $("#d-" + personID).val();
+            var date = $("#date-" + personID).val();
+            window.location = '@Url.Action("ListOfPatient", "Account")?personID=' + personID  + '&date=' + date;
+
+                    PersonName = $("#PersonName").val();
+                    //Appointment = $("#Appointment").val();
+                   // PersonRole = $("#roleDrp").val();
+
+                    if (PersonName != "" )
+                alert("The result are successfully saved!");
+
+                }*@
+    </script>
+</head>
+<body>
+    <section class="content-holder">
+
+        <article class="content-table">
+
+            <main id="main_content">
+
+                <h1 id="heading">Nurse Appointment</h1>
+
+                <table class="table table-striped" border="1">
+                    <tr>
+                        <th colspan="11" style="padding:10px"><strong>Patient's List</strong></th>
+                    </tr>
+                    <tr>
+                        <th>Full name</th>
+                        <th>
+                            <input type="button" title="Content of q2" value="Q1" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q2" value="Q2" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q3" value="Q3" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q4" value="Q4" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q5" value="Q5" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q6" value="Q6" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q7" value="Q7" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q8" value="Q8" />
+                        </th>
+
+
+                        <th>Appointment</th>
+                        <th>Patient Email address</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+
+                        // check = @HttpContext.Session.GetString("PersonID");
+
+
+                <tr>
+
+                    <td>
+
+                        @item.PersonName
+
+                    </td>
+                    <td>
+                        @if (item.Q1 == true)
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                        else
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                    </td>
+
+                    <td>
+
+                        <p>
+                            @item.Q2
+                        </p>
+
+                        @*@if (item.Q2 == true)
+            {
+                <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+            else
+            {
+                <img style="width:30px;height:30px;" src="~/Image/del.png" />}*@
+
+                    </td>
+                    <td>
+
+                        @if (item.Q3 == true)
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                        else
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                    </td>
+                    <td>
+                        @if (item.Q4 == true)
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                        else
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                    </td>
+                    <td>
+
+                        @if (item.Q5 == true)
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                        else
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                    </td>
+                    <td>
+
+                        @if (item.Q6 == true)
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                        else
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                    </td>
+                    <td>
+
+                        @if (item.Q7 == true)
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                        else
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                    </td>
+
+                    <td>
+
+                        @if (item.Q8 == true)
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                        else
+                        {
+                            <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                    </td>
+
+                    <td>
+                        <p>
+                            @item.AppointmentTime.ToString()
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            @item.EmailAddress.ToString()
+                        </p>
+                    </td>
+                </tr>
+                    }
+                </table>
+                @*<p>
+                    To monitor Assigned patient click here <a href="../Account/NursePage">
+                        <button style="margin-top: 20px;">Back to Nurse Page</button>
+                    </a>
+                </p>*@
+
+            </main>
+        </article>
+        <div class="clear"></div>
+    </section>
+</body>
+</html>

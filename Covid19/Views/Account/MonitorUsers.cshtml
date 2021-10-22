@@ -1,0 +1,283 @@
+﻿@model  IEnumerable<Person>
+
+
+<!DOCTYPE html>
+<style>
+    .my-custom-scrollbar {
+        position: relative;
+        overflow: auto;
+        width:300px;
+    }
+
+    .table-wrapper-scroll-y {
+        display: block;
+    }
+
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="description" content="....">
+    <link rel="stylesheet" href="~/css/siteHTML.css">
+    <script type="text/javascript">
+        $("#logOutdiv").show();
+        $("#monitorUsers").show();
+        $("#managerPage").show();
+        $("#Report").show();
+        $("#login").hide();
+        $("#Registeration").hide();
+        function handleLogOutClick() {
+            alert("You are successfully Log Out.");
+            window.location = '@Url.Action("logOut", "Account")';
+
+        }
+                function handleClick(personID) {
+                    alert("The User is deleted.");
+                    window.location = '@Url.Action("removeUser", "Account")?personID=' + personID;
+
+                }
+
+        function validate(personID) {
+            var doctor = $("#d-" + personID).val();
+            var date = $("#date-" + personID).val();
+            var today = new Date();
+            //if (today > Date. date) {
+            //    alert("It is not possible to set an appointment for the past");
+            //} else
+                if (date != "" && doctor != 0) {
+                alert("It is not possible to set an appointment with nurse and assign to doctor at the same time");
+            } else {
+                window.location = '@Url.Action("MonitorPatients", "Account")?personID=' + personID + '&doctor=' + doctor + '&date=' + date;
+
+                PersonName = $("#PersonName").val();
+                //Appointment = $("#Appointment").val();
+                PersonRole = $("#roleDrp").val();
+            }
+
+                }
+    </script>
+</head>
+<body>
+    <section class="content-holder ">
+
+        <article class="content-table">
+
+            <main id="main_content">
+
+                <h1 id="heading">List of All Users</h1>
+
+                <table class="table table-striped table-wrapper-scroll-y my-custom-scrollbar w-auto small" border="1">
+                    <tr>
+                        <th colspan="13" style="padding:10px"><strong>List of Active Patients</strong></th>
+                    </tr>
+
+
+                    <tr>
+                        <th>Full name</th>
+                        <th>Role</th>
+                        <th>Date Of Birth</th>
+                        <th>Address</th>
+                        <th>Email Address</th>
+                        <th>Phone Number</th>
+                        <th>Remove From System</th>
+
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            @if (item.role == Person.Role.Patient)
+                            {
+                                <td>
+
+                                    @item.Name
+
+                                </td>
+
+                                <td>
+                                    @item.role
+                                </td>
+
+                                <td>
+                                    @item.DateOfBirth
+                                </td>
+
+                                <td>
+                                    @item.Address
+                                </td>
+
+                                <td>
+                                    @item.EmailAddress
+                                </td>
+
+                                <td>
+                                    @item.PhoneNumber
+                                </td>
+
+
+                                <td>
+                                    <input type="submit" value="remove" onclick="handleClick(@item.ID)">
+                                </td>
+
+                            }
+
+                        </tr>
+                    }
+
+                </table>
+
+                <table class="table table-striped table-wrapper-scroll-y my-custom-scrollbar w-auto small" border="1">
+                    <tr>
+                        <th colspan="13" style="padding:10px"><strong>List of Active Nurses</strong></th>
+                    </tr>
+
+
+                    <tr>
+                        <th>Full name</th>
+                        <th>Role</th>
+                        <th>Date Of Birth</th>
+                        <th>Address</th>
+                        <th>Email Address</th>
+                        <th>Phone Number</th>
+                        <th>RegistrationNumber</th>
+                        <th>Remove From System</th>
+
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            @if (item.role == Person.Role.Nurse)
+                            {
+                                <td>
+
+                                    @item.Name
+
+                                </td>
+
+                                <td>
+                                    @item.role
+                                </td>
+
+                                <td>
+                                    @item.DateOfBirth
+                                </td>
+
+                                <td>
+                                    @item.Address
+                                </td>
+
+                                <td>
+                                    @item.EmailAddress
+                                </td>
+
+                                <td>
+                                    @item.PhoneNumber
+                                </td>
+
+                                <td>
+                                    @item.RegistrationNumber
+                                </td>
+
+
+                                <td>
+                                    <input type="submit" value="remove" onclick="handleClick(@item.ID)">
+                                </td>
+
+                            }
+
+                        </tr>
+                    }
+
+                </table>
+
+                <table class="table table-striped table-wrapper-scroll-y my-custom-scrollbar w-auto small" border="1">
+                    <tr>
+                        <th colspan="13" style="padding:10px"><strong>List of Active Doctors</strong></th>
+                    </tr>
+
+
+                    <tr>
+                        <th>Full name</th>
+                        <th>Role</th>
+                        <th>Date Of Birth</th>
+                        <th>Address</th>
+                        <th>Email Address</th>
+                        <th>Phone Number</th>
+                        <th>RegistrationNumber</th>
+                        <th>Remove From System</th>
+
+
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            @if (item.role == Person.Role.Doctor)
+                            {
+                                <td>
+
+                                    @item.Name
+
+                                </td>
+
+                                <td>
+                                    @item.role
+                                </td>
+
+                                <td>
+                                    @item.DateOfBirth
+                                </td>
+
+                                <td>
+                                    @item.Address
+                                </td>
+
+                                <td>
+                                    @item.EmailAddress
+                                </td>
+
+                                <td>
+                                    @item.PhoneNumber
+                                </td>
+
+                                <td>
+                                    @item.RegistrationNumber
+                                </td>
+
+
+                                <td>
+                                    <input type="submit" value="remove" onclick="handleClick(@item.ID)">
+                                </td>
+
+                            }
+
+                        </tr>
+                    }
+
+                </table>
+
+                <p>
+                    To Add new User (Doctor, Nurse, Patient) Click here
+                    <a href="../Account/Profile"> Add New User </a>
+                </p>
+
+                @*<p>
+                    <a href="../Account/ManagerPage">
+                        <button style="margin-top: 20px;">Back to Admin Page</button>
+                    </a>
+                </p>*@
+            </main>
+
+        </article>
+
+
+        <div class="clear"></div>
+
+    </section>
+</body>
+</html>

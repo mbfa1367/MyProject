@@ -1,0 +1,271 @@
+﻿@model IEnumerable<MonitorPatient_Dto>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<style>
+    .my-custom-scrollbar {
+        position: relative;
+        overflow: auto;
+        width: 300px;
+    }
+
+    .table-wrapper-scroll-y {
+        display: block;
+    }
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="description" content="....">
+    <link rel="stylesheet" href="~/css/siteHTML.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $("#logOutdiv").show();
+        $("#ListOfPatientbtn").show();
+        $("#DrPage").show();
+        $("#login").hide();
+        $("#Registeration").hide();
+
+
+        function handleLogOutClick() {
+            //var ifrm = document.getElementById('myIframe');
+            //ifrm = ifrm.contentWindow || ifrm.contentDocument.document || ifrm.contentDocument;
+            //ifrm.document.open();
+            //ifrm.document.write('<script>alert("You are successfully Log Out");<\/script>');
+            //ifrm.document.close();
+
+            alert("You are successfully Log Out.");
+            window.location = '@Url.Action("logOut", "Account")';
+
+        }
+
+        function handleClick(personID) {
+             alert("The Patient is rejected.");
+             window.location = '@Url.Action("doctorRemovePatient", "Account")?personID=' + personID;
+        }
+
+        function acceptClick(personID) {
+             alert("The Appoitnment with this Patient is accepted.");
+             window.location = '@Url.Action("doctorAcceptPatient", "Account")?personID=' + personID;
+        }
+
+        function validate(personID) {
+            var date = $("#date-" + personID).val();
+            window.location = '@Url.Action("changeAppointment", "Account")?personID=' + personID  + '&date=' + date;
+            PersonName = $("#PersonName").val();
+            alert("Time of appointment are changed!");
+        }
+
+        function ChangeTime() {
+            $('#ptable td:nth-child(13)').show();
+            $('#ptable td:nth-child(14)').show();
+        }
+
+        $(document).ready(function () {
+            $('#ptable td:nth-child(13)').hide();
+            $('#ptable td:nth-child(14)').hide();
+        });
+
+    </script>
+</head>
+<body>
+    <section class="content-holder">
+
+        <article class="content-table">
+
+            <main id="main_content">
+
+                <h1 id="heading">List of Patients</h1>
+
+                <table id="ptable" class="table table-striped table-wrapper-scroll-y my-custom-scrollbar w-auto small" border="1">
+                    <tr>
+                        <th colspan="13" style="padding:10px"><strong>Patient's List</strong></th>
+                    </tr>
+                    <tr>
+                        <th>Full name</th>
+                        <th>
+                            <input type="button" title="Content of q1" value="Q1" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q2" value="Q2" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q3" value="Q3" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q4" value="Q4" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q5" value="Q5" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q6" value="Q6" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q7" value="Q7" />
+                        </th>
+                        <th>
+                            <input type="button" title="Content of q8" value="Q8" />
+                        </th>
+                        <th>Patient Email address</th>
+                        <th>Time of appointment</th>
+
+                        <th>Remove</th>
+                        <th>Accept</th>
+                        <th>
+                            <input type="button" title="Content of q4" value="Change the appointment" onclick="ChangeTime()" />
+                        </th>
+                        <th>Submit change</th>
+
+
+
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+
+                        // check = @HttpContext.Session.GetString("PersonID");
+
+
+                <tr>
+                    @if (item.DoctorPersonID == int.Parse(@HttpContextAccessor.HttpContext.Session.GetString("UserID")))
+                    {
+                        <td>
+
+                            @item.PersonName
+
+                        </td>
+                        <td>
+                            @if (item.Q1 == true)
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                            else
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                        </td>
+
+                        <td>
+
+                            <p>
+                                @item.Q2
+                            </p>
+
+                            @*@if (item.Q2 == true)
+                {
+                    <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                else
+                {
+                    <img style="width:30px;height:30px;" src="~/Image/del.png" />}*@
+
+                        </td>
+                        <td>
+
+                            @if (item.Q3 == true)
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                            else
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                        </td>
+                        <td>
+                            @if (item.Q4 == true)
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                            else
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                        </td>
+                        <td>
+
+                            @if (item.Q5 == true)
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                            else
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                        </td>
+                        <td>
+
+                            @if (item.Q6 == true)
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                            else
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                        </td>
+                        <td>
+
+                            @if (item.Q7 == true)
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                            else
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                        </td>
+
+                        <td>
+
+                            @if (item.Q8 == true)
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                            else
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                        </td>
+
+                        <td>
+                            @item.EmailAddress.ToString()
+                        </td>
+
+                        <td>
+                            @item.AppointmentTime
+                        </td>
+
+
+
+                        <td>
+                            <input type="submit" value="Reject" onclick="handleClick(@item.PersonID)">
+                        </td>
+                        <td>
+                            <input type="submit" value="Accept" onclick="acceptClick(@item.PersonID)">
+                        </td>
+
+                        <td>
+                            <input id="date-@item.PersonID" type="datetime-local" name="r_date" required>
+                        </td>
+
+                        <td>
+                            <button id="changeDateBtn" type="submit" class="btn btn-primary" OnClick="validate(@item.PersonID);">Save</button>
+                        </td>
+                    }
+
+
+                </tr>
+                    }
+
+                </table>
+                @*<p>
+                    <a href="../Account/DoctorPage">
+                        <button style="margin-top: 20px;">Back to Doctor Page</button>
+                    </a>
+                </p>*@
+            </main>
+
+        </article>
+
+
+        <div class="clear"></div>
+
+    </section>
+</body>
+</html>

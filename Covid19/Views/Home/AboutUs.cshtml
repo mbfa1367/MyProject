@@ -1,0 +1,62 @@
+﻿@*@{
+        ViewData["Title"] = "Home Page";
+    }
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    </div>*@
+
+@model IEnumerable<Covid19.Models.Person>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="description" content="....">
+    <link rel="stylesheet" href="~/css/siteHTML.css">
+</head>
+<body>
+
+        <section class="content-holder">
+            <!--content holder-->
+            <article class="content">
+                <!--content-->
+                <main id="main_content">
+
+                    <h1 id="heading">About Company</h1>
+                    <p>
+                        The objective of this site is to help patients, nurses, and doctors to have access faster to the medical system.
+                        On our site, patients are able to register and perform a self-assessment test in order to get help from a doctor or a nurse.
+                        After registering and performing the self-assessment test, these data will be communicated to a nurse for consultation.
+                        A nurse will determine to consult more with the patient or assign the patient to a doctor, or not accepting the patient
+                        because the symptoms are not serious. After assigning a patient to a doctor, the doctor can go over the patient’s information
+                        including the self-assessment test, and provide an appointment to the patient.
+                        If there is no need to see the patient, the doctor can reject the patient.
+                    </p>
+                </main>
+
+            </article><!--content-->
+
+            <aside class="sidebar">
+                <!--sidebar-->
+                <div>
+                    <h3>Related Links</h3>
+                    <ul>
+                        <li><a href="https://www.worldometers.info/coronavirus/?utm_campaign=homeAdvegas1?">News</a></li>
+                        <li><a href="https://www.211qc.ca/en/health/covid-19">Emergency</a></li>
+                        <li><a href="https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/testing-for-covid-19/">Covid-19 Centers</a></li>
+
+                    </ul>
+
+                </div>
+            </aside><!--sidebar-->
+
+            <div class="clear"></div>
+
+        </section><!--content holder-->
+    
+</body>
+</html>

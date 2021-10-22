@@ -1,0 +1,105 @@
+﻿@model Person
+
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+@*<h1>@ViewData["Title"]</h1>*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="description" content="....">
+    <link rel="stylesheet" href="~/css/siteHTML.css">
+</head>
+<body>
+
+        <section class="content-holder">
+            <!--content holder-->
+            <article class="content">
+                <!--content-->
+                <main id="main_content">
+
+                    <div>
+                        <!--login bar-->
+
+
+                        <p><b>login to site</b></p>
+                        <form method="Post">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            @if (@ViewBag.Message != null)
+                            {
+                                <div style="border: 1px solid red">
+                                    @ViewBag.Message
+                                </div>
+                            }
+                            <table>
+                                <tr>
+                                    <td>@Html.LabelFor(a => a.EmailAddress)</td>
+                                    <td>@Html.TextBoxFor(a => a.EmailAddress)</td>
+                                    <td>@Html.ValidationMessageFor(a => a.EmailAddress)</td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        @Html.LabelFor(a => a.Password)
+                                    </td>
+                                    <td>
+                                        @Html.PasswordFor(a => a.Password)
+                                    </td>
+                                    <td>
+                                        @Html.ValidationMessageFor(a => a.Password)
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td></td>
+                                    <td><input type="submit" value="login to continue"></td>
+                                </tr>
+                            </table>
+                            </fieldset>
+                        </form>
+                    </div>
+
+                </main>
+                <iframe id="myIframe" style="display:none;"></iframe>
+            </article><!--content-->
+
+            <aside class="sidebar">
+                <!--sidebar-->
+                <div>
+                    <h3>Related Links</h3>
+                    <ul>
+                        <li><a href="https://www.worldometers.info/coronavirus/?utm_campaign=homeAdvegas1?">News</a></li>
+                        <li><a href="https://www.211qc.ca/en/health/covid-19">Emergency</a></li>
+                        <li><a href="https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/testing-for-covid-19/">Covid-19 Centers</a></li>
+
+                    </ul>
+
+                </div>
+            </aside><!--sidebar-->
+
+            <div class="clear"></div>
+
+        </section><!--content holder-->
+
+</body>
+<script>
+    if (@ViewBag.error = "Error") {
+        //alert("The User or pass is wrong!");
+        var ifrm = document.getElementById('myIframe');
+        ifrm = ifrm.contentWindow || ifrm.contentDocument.document || ifrm.contentDocument;
+        ifrm.document.open();
+        ifrm.document.write('<script>alert("The User or pass is wrong!");<\/script>');
+        ifrm.document.close();
+    }
+</script>
+</html>

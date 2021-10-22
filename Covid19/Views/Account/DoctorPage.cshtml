@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "DoctorPage";
+
+}
+
+@model Person
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+@*<h1>@ViewData["Title"]</h1>*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="description" content="....">
+    <link rel="stylesheet" href="~/css/siteHTML.css">
+    <script type="text/javascript">
+        $("#logOutdiv").show();
+        $("#ListOfPatientbtn").show();
+        $("#login").hide();
+        $("#Registeration").hide();
+
+        function handleLogOutClick() {
+            alert("You are successfully Log Out.");
+            window.location = '@Url.Action("logOut", "Account")';
+
+        }
+    </script>
+</head>
+<body>
+        <section class="content-holder">
+            <!--content holder-->
+            <article class="content">
+                <!--content-->
+                <main id="main_content">
+                    <h2 id="heading">Welcome to your account!Your information is as below</h2>
+                    <div>
+                        <div class="row">
+                            <label>Name: </label>
+                            <input type="text" class="form-control" value='@HttpContextAccessor.HttpContext.Session.GetString("Name")'>
+                        </div>
+
+                        <div class="row">
+                            <label style="margin-top: 20px;">Date Of Birth: </label>
+                            <input type="text" class="form-control" value='@HttpContextAccessor.HttpContext.Session.GetString("DateOfBirth")'>
+                        </div>
+                        <div class="row">
+                            <label style="margin-top: 20px;"> Address: </label>
+                            <input type="text" class="form-control" value='@HttpContextAccessor.HttpContext.Session.GetString("Address")' ">
+                        </div>
+                        <div class="row">
+                            <label style="margin-top: 20px;">Phone Number: </label>
+                            <input type="text" class="form-control" value='@HttpContextAccessor.HttpContext.Session.GetString("PhoneNumber")'>
+                        </div>
+                        <div class="row">
+                            <label style="margin-top: 20px;">Email Address: </label>
+                            <input type="text" class="form-control" value='@HttpContextAccessor.HttpContext.Session.GetString("EmailAddress")'>
+                        </div>
+
+                    </div>
+
+                    @*<p>
+                        To monitor Assigned patient click here <a href="../Account/ListOfPatient">
+                            <button style="margin-top: 20px;">check request</button>
+                        </a>
+                    </p>*@
+
+                    @*<p>
+                        To log Out click here
+                        <a href="#" onclick="handleClick()">
+                            log Out
+                        </a>
+                    </p>*@
+
+                </main>
+
+            </article><!--content-->
+
+            <aside class="sidebar">
+                <!--sidebar-->
+                <div>
+                    <h3>Related Links</h3>
+                    <ul>
+                        <li><a href="https://www.worldometers.info/coronavirus/?utm_campaign=homeAdvegas1?">News</a></li>
+                        <li><a href="https://www.211qc.ca/en/health/covid-19">Emergency</a></li>
+                        <li><a href="https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/testing-for-covid-19/">Covid-19 Centers</a></li>
+
+                    </ul>
+
+                </div>
+            </aside><!--sidebar-->
+
+            <div class="clear"></div>
+
+        </section><!--content holder-->
+
+</body>
+</html>

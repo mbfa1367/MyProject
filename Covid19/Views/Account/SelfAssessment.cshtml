@@ -1,0 +1,361 @@
+﻿@model SelfAssessment
+@{ ViewData["Title"] = "SelfAssesment"; }
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="description" content="....">
+    <link rel="stylesheet" href="~/css/siteHTML.css">
+    <script type="text/javascript">
+        $("#logOutdiv").show();
+        $("#PatientPage").show();
+        $("#SelfAssessment").show();
+        $("#login").hide();
+        $("#Registeration").hide();
+    function handleLogOutClick() {
+            alert("You are successfully Log Out.");
+            window.location = '@Url.Action("logOut", "Account")';
+
+        }
+        function validate() {
+                alert("Your Self-assessment tests are successfully Registred.");
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#SecondQuestion").hide();
+            $("#ThirdOneQuestion").hide();
+            $("#ThirdTwoQuestion").hide();
+            $("#ThirdThreeQuestion").hide();
+            $("#FourthQuestion").hide();
+            $("#FifthQuestion").hide();
+            $("#SixthQuestion").hide();
+            $("#SeventhQuestion").hide();
+        });
+        function checkQ1(browser) {
+            if (browser == "False") {
+                $("#SecondQuestion").show();
+                $("#ThirdOneQuestion").hide();
+                $("#ThirdTwoQuestion").hide();
+                $("#ThirdThreeQuestion").hide();
+                $("#FourthQuestion").hide();
+                $("#FifthQuestion").hide();
+                $("#SixthQuestion").hide();
+                $("#SeventhQuestion").hide();
+            }
+
+            else {
+                $("#SecondQuestion").hide();
+                $("#ThirdQuestion").hide();
+                $("#ThirdOneQuestion").hide();
+                $("#ThirdTwoQuestion").hide();
+                $("#ThirdThreeQuestion").hide();
+                $("#FourthQuestion").hide();
+                $("#FifthQuestion").hide();
+                $("#SixthQuestion").hide();
+                $("#SeventhQuestion").show();
+                
+            }
+        }
+        function checkQ2(browser) {
+            if (browser == "6 months - 5 years") {
+                $("#ThirdOneQuestion").show();
+                $("#ThirdTwoQuestion").hide();
+                $("#ThirdThreeQuestion").hide();
+                $("#FourthQuestion").hide();
+                $("#FifthQuestion").hide();
+                $("#SixthQuestion").hide();
+                $("#SeventhQuestion").hide();
+            }
+            else if (browser == "6-17 years") {
+                $("#ThirdTwoQuestion").show();
+                $("#ThirdOneQuestion").hide();
+                $("#ThirdThreeQuestion").hide();
+                $("#FourthQuestion").hide();
+                $("#FifthQuestion").hide();
+                $("#SixthQuestion").hide();
+                $("#SeventhQuestion").hide();
+            }
+            else {
+                $("#ThirdThreeQuestion").show();
+                $("#ThirdOneQuestion").hide();
+                $("#ThirdTwoQuestion").hide();
+                $("#FourthQuestion").hide();
+                $("#FifthQuestion").hide();
+                $("#SixthQuestion").hide();
+                $("#SeventhQuestion").hide();
+            }
+        }
+        function checkQ31(browser) {
+            $("#SeventhQuestion").show();
+        }
+        function checkQ3(browser) {
+            if (browser == "True") {
+                $("#FourthQuestion").show();
+                $("#FifthQuestion").hide();
+                $("#SixthQuestion").hide();
+                $("#SeventhQuestion").hide();
+            }
+            else if (browser == "False") {
+                $("#FifthQuestion").show();
+                $("#FourthQuestion").hide();
+                $("#SixthQuestion").hide();
+                $("#SeventhQuestion").hide();
+            }
+
+        }
+        function checkQ4(browser) {
+            $("#SeventhQuestion").show();
+        }
+        function checkQ5(browser) {
+            if (browser == "True") {
+                $("#SixthQuestion").show();
+                $("#SeventhQuestion").hide();
+            }
+            if (browser == "False") {
+                $("#SixthQuestion").hide();
+                $("#SeventhQuestion").show();
+            }
+        }
+        
+    </script>
+</head>
+<body>
+        <section class="content-holder">
+            <!--content holder-->
+            <article class="content">
+                <!--content-->
+                <main id="main_content">
+
+                    <h1 id="heading">Complete Self Assesment Form</h1>
+
+                    <form method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <p>
+                                Are you having difficulty breathing?
+
+                                <label></label>
+                                <br><br>
+
+                                <input asp-for="Q1" type="radio" id="q1" name="Q1" value="True" OnClick="checkQ1(this.value)">
+                                <label for="q"> Yes</label><br>
+                                <input asp-for="Q1" type="radio" id="q1" name="Q1" value="False" OnClick="checkQ1(this.value)">
+                                <label for="q"> No</label><br>
+
+                            </p>
+                        </div>
+                        <div class="form-group" ID="SecondQuestion">
+                            <p>
+                                Please select an age range
+                                <label></label>
+                                <br><br>
+
+                                <input asp-for="Q2" type="radio" id="q2" name="Q2" value="6 months - 5 years" OnClick="checkQ2(this.value)">
+                                <label for="q"> 6 months - 5 years</label><br>
+                                <input asp-for="Q2" type="radio" id="q2" name="Q2" value="6-17 years" OnClick="checkQ2(this.value)">
+                                <label for="q"> 6-17 years</label><br>
+                                <input asp-for="Q2" type="radio" id="q2" name="Q2" value="18 years+" OnClick="checkQ2(this.value)">
+                                <label for="q"> 18 years+</label><br>
+
+                            </p>
+                        </div>
+
+                        <div class="form-group" ID="ThirdOneQuestion">
+                            <p>
+                                Is your child experiencing ANY of the following symptoms?
+                                Fever (38.5°C rectal temperature (101.3°F) or higher)
+                                Cough (new or worse), shortness of breath, or difficulty breathing
+                                Runny nose or nasal congestion or sore throat
+                                AND
+                                fever (38.1°C rectal temperature (100.6°F) or higher)
+                                Abdominal pain, vomiting, or diarrhea
+                                AND
+                                fever (38.1°C rectal temperature (100.6°F) or higher)
+                                <label></label>
+                                <br><br>
+
+                                <input asp-for="Q3" type="radio" id="q3" name="Q3" value="True" OnClick="checkQ3(this.value)">
+                                <label for="q"> Yes</label><br>
+                                <input asp-for="Q3" type="radio" id="q3" name="Q3" value="False" OnClick="checkQ31(this.value)">
+                                <label for="q"> No</label><br>
+
+                            </p>
+                        </div>
+                        <div class="form-group" ID="ThirdTwoQuestion">
+                            <p>
+                                Does your child have ANY of the following symptoms?
+                                Fever (oral temperature 38.1°C (100.6°F) or higher)
+                                Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste
+                                Recent cough or worsening of a chronic cough
+                                Shortness of breath
+                                Trouble breathing
+                                Sore throat
+                                Runny nose or congestion (of unknown cause)
+                                <label></label>
+                                <br><br>
+
+                                <input asp-for="Q3" type="radio" id="q3" name="Q3" value="True" OnClick="checkQ3(this.value)">
+                                <label for="q"> Yes</label><br>
+                                <input asp-for="Q3" type="radio" id="q3" name="Q3" value="False" OnClick="checkQ3(this.value)">
+                                <label for="q"> No</label><br>
+
+                            </p>
+                        </div>
+                        <div class="form-group" ID="ThirdThreeQuestion">
+                            <p>
+                                Are you experiencing ANY of the following symptoms?
+                                Fever (oral temperature 38.1°C (100.6°F) or higher)
+                                Sudden loss of sense of smell (anosmia) without nasal congestion, with or without loss of taste
+                                Recent cough or worsening of a chronic cough
+                                Shortness of breath
+                                Trouble breathing
+                                Sore throat
+                                Runny nose or congestion (of unknown cause)
+                                <label></label>
+                                <br><br>
+
+                                <input asp-for="Q3" type="radio" id="q3" name="Q3" value="True" OnClick="checkQ3(this.value)">
+                                <label for="q"> Yes</label><br>
+                                <input asp-for="Q3" type="radio" id="q3" name="Q3" value="False" OnClick="checkQ3(this.value)">
+                                <label for="q"> No</label><br>
+
+                            </p>
+                        </div>
+                        <div class="form-group" ID="FourthQuestion">
+                            <p>
+                                Are you or the person who is going to get tested in one of the situations below?
+                                Is 0 to 3 months old
+                                Is experiencing an obstruction of nasal passages other than normal congestion
+                                Is currently having a nosebleed episode
+                                Has had a nosebleed episode in the past week
+                                Has undergone any of the following types of surgery:
+                                Mouth surgery in the past week?
+                                Nose surgery in the past month (adult) OR
+                                Nose surgery in the past 3 weeks (child)
+                                Is currently wheezing.
+                                <label></label>
+                                <br><br>
+
+                                <input asp-for="Q4" type="radio" id="q4" name="Q4" value="True" OnClick="checkQ4(this.value)">
+                                <label for="q"> Yes</label><br>
+                                <input asp-for="Q4" type="radio" id="q4" name="Q4" value="False" OnClick="checkQ4(this.value)">
+                                <label for="q"> No</label><br>
+
+                            </p>
+                        </div>
+                        <div class="form-group" ID="FifthQuestion">
+                            <p>
+                                Are you experiencing at least 2 of the following symptoms?
+                                Stomach aches
+                                Nausea or vomiting
+                                Diarrhea
+                                Major fatigue
+                                Significant loss of appetite
+                                Generalized muscle pain (not related to physical exertion)
+                                Headache
+                                <label></label>
+                                <br><br>
+
+                                <input asp-for="Q5" type="radio" id="q5" name="Q5" value="True" OnClick="checkQ5(this.value)">
+                                <label for="q"> Yes</label><br>
+                                <input asp-for="Q5" type="radio" id="q5" name="Q5" value="False" OnClick="checkQ5(this.value)">
+                                <label for="q"> No</label><br>
+
+                            </p>
+                        </div>
+                        <div class="form-group" ID="SixthQuestion">
+                            <p>
+                                Are you or the person who is going to get tested in one of the situations below?
+                                Is 0 to 3 months old
+                                Is experiencing an obstruction of nasal passages other than normal congestion
+                                Is currently having a nosebleed episode
+                                Has had a nosebleed episode in the past week
+                                Has undergone any of the following types of surgery:
+                                Mouth surgery in the past week?
+                                Nose surgery in the past month (adult) OR
+                                Nose surgery in the past 3 weeks (child)
+                                Is currently wheezing.
+                                <label></label>
+                                <br><br>
+
+                                <input asp-for="Q4" type="radio" id="q4" name="Q4" value="True" OnClick="checkQ4(this.value)">
+                                <label for="q"> Yes</label><br>
+                                <input asp-for="Q4" type="radio" id="q4" name="Q4" value="False" OnClick="checkQ4(this.value)">
+                                <label for="q"> No</label><br>
+
+                            </p>
+                        </div>
+
+                        <div class="form-group" ID="SeventhQuestion">
+                            <p>
+                                Have you been in close contact with a confirmed or probable case of COVID-19
+                                <label></label>
+                                <br><br>
+
+                                <input asp-for="Q6" type="radio" id="q6" name="Q6" value="True">
+                                <label for="q"> Yes</label><br>
+                                <input asp-for="Q6" type="radio" id="q6" name="Q6" value="False">
+                                <label for="q"> No</label><br>
+
+                            </p>
+
+                            <p>
+                                Have you been tested for COVID-19
+                                <label></label>
+                                <br><br>
+
+                                <input asp-for="Q7" type="radio" id="q7" name="Q7" value="True">
+                                <label for="q"> Yes</label><br>
+                                <input asp-for="Q7" type="radio" id="q7" name="Q7" value="False">
+                                <label for="q"> No</label><br>
+
+                            </p>
+
+                            <p>
+                                Have you or someone close to you travelled outside of Canada within the last 14 days
+                                <label></label>
+                                <br><br>
+
+                                <input asp-for="Q8" type="radio" id="q8" name="Q8" value="True">
+                                <label for="q"> Yes</label><br>
+                                <input asp-for="Q8" type="radio" id="q8" name="Q8" value="False">
+                                <label for="q"> No</label><br>
+
+                            </p>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-primary" OnClick="validate();">Submit</button>
+                    </form>
+
+
+                </main>
+
+            </article><!--content-->
+
+            <aside class="sidebar">
+                <!--sidebar-->
+                <div>
+                    <h3>Related Links</h3>
+                    <ul>
+                        <li><a href="https://www.worldometers.info/coronavirus/?utm_campaign=homeAdvegas1?">News</a></li>
+                        <li><a href="https://www.211qc.ca/en/health/covid-19">Emergency</a></li>
+                        <li><a href="https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/testing-for-covid-19/">Covid-19 Centers</a></li>
+
+                    </ul>
+
+                </div>
+            </aside><!--sidebar-->
+
+            <div class="clear"></div>
+
+        </section><!--content holder-->
+</body>
+</html>

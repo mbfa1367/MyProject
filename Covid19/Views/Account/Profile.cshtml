@@ -1,0 +1,182 @@
+﻿@model Person
+
+@{
+    ViewBag.Title = "User Registration";
+}
+
+@*@{
+    ViewData["Title"] = "Privacy Policy";
+}*@
+@*<h1>@ViewData["Title"]</h1>*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="description" content="....">
+    <link rel="stylesheet" href="~/css/siteHTML.css">
+    <script type="text/javascript">
+        function RoleRefresh() {
+            val = $("#roleDrp").val();
+            if (val == "@Person.Role.Patient")
+                $("#regNumberTxt").attr("disabled", "disabled");
+            else
+                $("#regNumberTxt").removeAttr("disabled");
+        }
+
+        function validate() {
+            name = $("#Name").val();
+            email = $("#EmailAddress").val();
+            phone = $("#PhoneNumber").val();
+            address = $("#Address").val();
+            birth = $("#DateOfBirth").val();
+            pass = $("#Password").val();
+            no = $("#RegistrationNumber").val();
+            role = $("#roleDrp").val();
+            id = $("#regNumberTxt").val();
+            if (role == "Patient") {
+                if (name != "" && email != "" && phone != "" && address != "" && birth != "" && pass != "" && no != "")
+                    alert("You are successfully Registred.");
+            }
+            else {
+                if (name != "" && email != "" && phone != "" && address != "" && birth != "" && pass != "" && no != "" && id != "")
+                    alert("You are successfully Registred.");
+            }
+            
+        }
+
+        $(document).ready(function () {
+            RoleRefresh();
+
+            // Make role dropdown disable ID Number TextBox
+            $("#roleDrp").change(RoleRefresh);
+
+            DateOfBirth.max = new Date().toISOString().split("T")[0];
+        });
+
+
+    </script>
+</head>
+<body>
+        <section class="content-holder">
+            <!--content holder-->
+            <article class="content">
+                <!--content-->
+                <main id="main_content">
+
+                    <h1 id="heading">Register to Website</h1>
+                    <div id="box">
+                        <p>
+                            In this page you find a form to register in to our website, in addition if you are
+                            not familiar with how you should do that, you can use a video that we upload it in the end of page.
+                            If you have any queation please contact us.
+                        </p>
+
+                        <p>
+                            Note*: Please Notify that if you are Nurse ot Doctor you should insert your IDNumber
+                        </p>
+
+                    </div>
+
+                    <form method="POST">
+                        <table>
+
+                            <tr>
+                                <td>Full Name:</td>
+                                <td>
+                                    <input asp-for="Name" id="Name" name="Name" required>
+                                    <span asp-EmailAddress-for="Name"></span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Email:</td>
+                                <td>
+                                    <input asp-for="EmailAddress" id="EmailAddress" name="EmailAddress" required>
+                                    <span asp-validation-for="EmailAddress"></span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Phone:</td>
+                                <td>
+                                    <input asp-for="PhoneNumber" id="PhoneNumber" name="PhoneNumber" required>
+                                    <span asp-validation-for="PhoneNumber"></span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Address:</td>
+                                <td>
+                                    <input asp-for="Address" id="Address" name="Address" required>
+                                    <span asp-validation-for="Address"></span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Date Of Birth:</td>
+                                <td>
+                                    <input type="date" id="DateOfBirth" name="DateOfBirth" required>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Password:</td>
+                                <td><input type="Password" id="Password" name="Password" required></td>
+                            </tr>
+
+
+                            <tr>
+                                <td>Role:</td>
+                                <td>
+                                    <select name="role" id="roleDrp">
+                                        <option value="@Person.Role.Patient">Patient</option>
+                                        <option value="@Person.Role.Doctor">Doctor</option>
+                                        <option value="@Person.Role.Nurse">Nurse</option>
+                                    </select>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>IDNumber:</td>
+          
+                                <td>
+                                    <input id="regNumberTxt" asp-for="RegistrationNumber" type="text" name="RegistrationNumber" required>
+                                    <span asp-validation-for="RegistrationNumber"></span>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td><input type="submit" name=r_register OnClick="validate();" id="login-form-submit"></td>
+                            </tr>
+
+
+                        </table>
+                    </form>
+                </main>
+
+            </article><!--content-->
+
+            <aside class="sidebar">
+                <!--sidebar-->
+                <div>
+                    <h3>Related Links</h3>
+                    <ul>
+                        <li><a href="https://www.worldometers.info/coronavirus/?utm_campaign=homeAdvegas1?">News</a></li>
+                        <li><a href="https://www.211qc.ca/en/health/covid-19">Emergency</a></li>
+                        <li><a href="https://www.quebec.ca/en/health/health-issues/a-z/2019-coronavirus/testing-for-covid-19/">Covid-19 Centers</a></li>
+
+                    </ul>
+
+                </div>
+            </aside><!--sidebar-->
+
+            <div class="clear"></div>
+
+        </section><!--content holder-->
+
+</body>
+</html>

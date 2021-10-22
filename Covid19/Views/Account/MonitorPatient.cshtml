@@ -1,0 +1,287 @@
+﻿@model AssessmentResultModelView
+
+
+<!DOCTYPE html>
+<style>
+    .my-custom-scrollbar {
+        position: relative;
+        overflow: auto;
+        width:300px;
+    }
+
+    .table-wrapper-scroll-y {
+        display: block;
+    }
+
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="description" content="....">
+    <link rel="stylesheet" href="~/css/siteHTML.css">
+    <script type="text/javascript">
+         $(document).ready(function () {
+           
+
+            DateOfBirth.min = new Date().toISOString().split("T")[0];
+        });
+
+
+    </script>
+    <script type="text/javascript">
+        $("#logOutdiv").show();
+        $("#MonitorPatient").show();
+        $("#NursePatientAppointment").show();
+        $("#NursePage").show();
+        $("#login").hide();
+        $("#Registeration").hide();
+        function handleLogOutClick() {
+            alert("You are successfully Log Out.");
+            window.location = '@Url.Action("logOut", "Account")';
+
+        }
+                function handleClick(personID) {
+                    alert("The Patient is rejected.");
+                    window.location = '@Url.Action("removePatient", "Account")?personID=' + personID;
+
+                }
+
+        function validate(personID) {
+            var doctor = $("#d-" + personID).val();
+            var date = $("#date-" + personID).val();
+            var today = new Date();
+            //if (today > Date. date) {
+            //    alert("It is not possible to set an appointment for the past");
+            //} else
+                if (date == "" ) {
+                alert("Date is blank");
+            } else {
+                window.location = '@Url.Action("MonitorPatients", "Account")?personID=' + personID + '&doctor=' + doctor + '&date=' + date;
+                PersonName = $("#PersonName").val();
+                //Appointment = $("#Appointment").val();
+                PersonRole = $("#roleDrp").val();
+            }
+                }
+    </script>
+</head>
+<body>
+    <section class="content-holder ">
+
+        <article class="content-table">
+
+            <main id="main_content">
+
+                <h1 id="heading">List of Patient's Request</h1>
+
+                <table class="table table-striped table-wrapper-scroll-y my-custom-scrollbar w-auto small" border="1">
+                    <tr>
+                        <th colspan="13" style="padding:10px"><strong>Patient's List</strong></th>
+                    </tr>
+
+
+                    <tr>
+                        <th>Full name</th>
+                        <th>
+                            <input type="button" title="1. Are you having difficulty breathing?" value="Q1" />
+                        </th>
+                        <th>
+                            <input type="button" title=" 2. Please select an age range" value="Q2" />
+                        </th>
+                        <th>
+                            <input type="button" title=" 3. Is your child experiencing ANY of the following symptoms?
+                                Fever (38.5°C rectal temperature (101.3°F) or higher)
+                                Cough (new or worse), shortness of breath, or difficulty breathing
+                                Runny nose or nasal congestion or sore throat
+                                AND
+                                fever (38.1°C rectal temperature (100.6°F) or higher)
+                                Abdominal pain, vomiting, or diarrhea
+                                AND
+                                fever (38.1°C rectal temperature (100.6°F) or higher)" value="Q3" />
+                        </th>
+                        <th>
+                            <input type="button" title="4. Are you or the person who is going to get tested in one of the situations below?
+                                Is 0 to 3 months old
+                                Is experiencing an obstruction of nasal passages other than normal congestion
+                                Is currently having a nosebleed episode
+                                Has had a nosebleed episode in the past week
+                                Has undergone any of the following types of surgery:
+                                Mouth surgery in the past week?
+                                Nose surgery in the past month (adult) OR
+                                Nose surgery in the past 3 weeks (child)
+                                Is currently wheezing." value="Q4" />
+                        </th>
+                        <th>
+                            <input type="button" title=" 5. Are you experiencing at least 2 of the following symptoms?
+                                Stomach aches
+                                Nausea or vomiting
+                                Diarrhea
+                                Major fatigue
+                                Significant loss of appetite
+                                Generalized muscle pain (not related to physical exertion)
+                                Headache" value="Q5" />
+                        </th>
+                        <th>
+                            <input type="button" title=" Have you been in close contact with a confirmed or probable case of COVID-19" value="Q6" />
+                        </th>
+                        <th>
+                            <input type="button" title="  Have you been tested for COVID-19" value="Q7" />
+                        </th>
+
+                        <th>
+                            <input type="button" title="  Have you or someone close to you travelled outside of Canada within the last 14 days" value="Q8" />
+                        </th>
+
+
+                        <th>Set appointment</th>
+                        <th>Assign to doctor or yourself</th>
+                        <th>Remove</th>
+                        <th>Submit</th>
+
+                    </tr>
+                    @foreach (var item in Model.PatientList)
+                    {
+
+                        <tr>
+                            @if (item.Status == "submit" && (item.DoctorPersonID == 0 && item.NursePersonID == 0))
+                            {
+                                <td>
+
+                                    @item.PersonName
+
+                                </td>
+
+                                <td>
+                                    @if (item.Q1 == true)
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                                    else
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                                </td>
+
+                                <td>
+                                    <p>
+                                        @item.Q2
+                                    </p>
+
+                                    @*@if (item.Q2 == true)
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                            else
+                            {
+                                <img style="width:30px;height:30px;" src="~/Image/del.png" />}*@
+
+                                </td>
+                                <td>
+
+                                    @if (item.Q3 == true)
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                                    else
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                                </td>
+                                <td>
+                                    @if (item.Q4 == true)
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                                    else
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                                </td>
+                                <td>
+
+                                    @if (item.Q5 == true)
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                                    else
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                                </td>
+                                <td>
+
+                                    @if (item.Q6 == true)
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                                    else
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                                </td>
+                                <td>
+
+                                    @if (item.Q7 == true)
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                                    else
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                                </td>
+                                <td>
+
+                                    @if (item.Q8 == true)
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/accept.png" /> }
+                                    else
+                                    {
+                                        <img style="width:30px;height:30px;" src="~/Image/del.png" />}
+
+                                </td>
+
+
+
+
+                                <td>
+                                    <input id="date-@item.PersonID" type="datetime-local" name="r_date" required>
+                                </td>
+
+                                <td>
+                                    @*<select name="role" id="roleDrp" onclick="showDoctorList()">
+                            </select>*@
+                                    @{
+                                        <form asp-controller="Account" asp-action="MonitorPatient" method="post">
+                                            <select id="d-@item.PersonID" asp-items="@(new SelectList(@ViewBag.ListofDocotor,"ID","Name"))"></select>
+                                        </form> }
+                                </td>
+
+
+                                <td>
+                                    <input type="submit" value="remove" onclick="handleClick(@item.PersonID)">
+                                </td>
+
+                                <td>
+                                    <button type="submit" class="btn btn-primary" OnClick="validate(@item.PersonID);">Save</button>
+                                </td>
+
+                            }
+
+
+
+
+                        </tr>
+}
+
+
+                </table>
+                @*<p>
+                    To monitor Assigned patient click here <a href="../Account/NursePage">
+                        <button style="margin-top: 20px;">Back to Nurse Page</button>
+                    </a>
+                </p>*@
+            </main>
+
+        </article>
+
+
+        <div class="clear"></div>
+
+    </section>
+</body>
+</html>

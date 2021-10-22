@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Covid19</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+</head>
+<body>
+    <div class="container">
+        <a class="navbar-brand" href="#"><img src="~/Image/covid-logo.jpg" height="80" alt="logo"></a>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler ml-2" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item ml-2 mt-1"><a href='@Url.Action("Index", "Home")' class="btn btn-primary">Home <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1"  id="Registeration"><a href='@Url.Action("Profile", "Account")' class="btn btn-primary">Registeration <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1" id="login"><a href='@Url.Action("Login", "Account")' class="btn btn-primary">Login <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1"><a href='@Url.Action("AboutUs", "Home")' class="btn btn-primary">About Us <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1"><a href='@Url.Action("ContactUs", "Home")' class="btn btn-primary">Contact Us <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1" style="display:none;" id="ListOfPatientbtn"><a href='@Url.Action("ListOfPatient", "Account")' class="btn btn-primary">Check Request <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1" style="display:none;" id="NursePatientAppointment"><a href='@Url.Action("NursePatientAppointment", "Account")' class="btn btn-primary">Check Request <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1" style="display:none;" id="DrPage"><a href='@Url.Action("DoctorPage", "Account")' class="btn btn-primary">Dr Main page <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1" style="display:none;" id="DrPage"><a href='@Url.Action("NursePage", "Account")' class="btn btn-primary">Dr Main page <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1" style="display:none;" id="SelfAssessment"><a href='@Url.Action("SelfAssessment", "Account")' class="btn btn-primary">SelfAssessment <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1" style="display:none;" id="PatientPage"><a href='@Url.Action("PatientPage", "Account")' class="btn btn-primary">Patient Page <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1" style="display:none;" id="managerPage"><a href='@Url.Action("ManagerPage", "Account")' class="btn btn-primary">Management <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1" style="display:none;" id="monitorUsers"><a href='@Url.Action("MonitorUsers", "Account")' class="btn btn-primary">Monitor Users <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1" style="display:none;" id="MonitorPatient"><a href='@Url.Action("MonitorPatient", "Account")' class="btn btn-primary">Monitor Patients <i class="icon-plus3 position-right"></i></a></li>
+                    <li class="nav-item ml-2 mt-1" style="display:none;" id="Report"><a href='@Url.Action("Report", "Account")' class="btn btn-primary">Report <i class="icon-plus3 position-right"></i></a></li>
+                    <Div class="float-right icon-plus3 btn ml-2" id="logOutdiv" style="display:none;">
+                        <a href="#" style=" color:darkslategray" id="logOutachr" onclick="handleLogOutClick()">
+                            <strong> log Out </strong>
+                        </a>
+                    </Div>
+                </ul>
+            </div>
+        </nav>
+
+        <!--<header>-->
+        <!--header-->
+        <!--<div class="logo">-->
+        <!--Logo bar-->
+        <!--<a href="../Views/Home/Home.cshtml">
+                <img src="~/Image/covid-logo.jpg" height="80" alt="logo">
+            </a>
+
+        </div>
+
+        <div class="clear"></div>
+
+        <nav class="main-menu">-->
+        <!--nav bar-->
+        <!--<ul>
+
+                    <li><a href='@Url.Action("Index", "Home")' class="btn btn-primary">Home <i class="icon-plus3 position-right"></i></a></li>
+                    <li><a href='@Url.Action("Profile", "Account")' class="btn btn-primary">Registeration <i class="icon-plus3 position-right"></i></a></li>
+                    <li><a href='@Url.Action("Login", "Account")' class="btn btn-primary">Login <i class="icon-plus3 position-right"></i></a></li>
+                    <li><a href='@Url.Action("AboutUs", "Home")' class="btn btn-primary">About Us <i class="icon-plus3 position-right"></i></a></li>
+                    <li><a href='@Url.Action("ContactUs", "Home")' class="btn btn-primary">Contact Us <i class="icon-plus3 position-right"></i></a></li>
+                    <Div class="float-right icon-plus3 btn" id="logOutdiv" style="display:none;">
+                        <a href="#" style=" color: wheat" id="logOutachr" onclick="handleLogOutClick()">
+                            <strong> log Out </strong>
+                        </a>
+                    </Div>
+                </ul>
+
+            </nav>
+        </header>-->
+
+    </div>
+    <div class="container col-12">
+        <div class="row justify-content-md-center">
+            <main role="main" class="col-12">
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <div class="container" class="pb-4">
+        <footer class="main-footer justify-content-md-center ">
+            <div class="row">
+                <div class="footer-box col-6">
+                    <h3>Footer Menu</h3>
+                    <ul>
+                        <li><a href='@Url.Action("Index", "Home")'>Home</a></li>
+                        <li><a href='@Url.Action("Profile", "Account")'>Registeration</a></li>
+                        <li><a href='@Url.Action("AboutUs", "Home")'>About Us</a></li>
+                        <li><a href='@Url.Action("ContactUs", "Home")'>Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-box col-6">
+                    <address>
+                        <h3>Company info</h3>
+                        <p>address : 100 masoin Avenue,sain cathine,10012</p>
+                        <p>email :<a href="mailto:admin@yahoo.com"> mailto:admin@yahoo.com</a></p>
+                        <p>Tel :<a href="tel:514678954"> 514678954</a></p>
+                    </address>
+                </div>
+            </div>
+        </footer>
+
+        <div class="copy justify-content-md-center" class="pb-4">
+            <!--copyright bar-->
+            <p><small> Copyright & Copy ; 2020. All rights Reserved</small></p>
+        </div>
+
+    </div>
+
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
